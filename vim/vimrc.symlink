@@ -35,6 +35,17 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'puppetlabs/puppet-syntax-vim'
 Plug 'luochen1990/rainbow'
 Plug 'hashivim/vim-terraform'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2'
+Plug 'scrooloose/syntastic'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+" Fast python completion (use ncm2 if you want type info or snippet support)
+Plug 'HansPinckaers/ncm2-jedi'
+" Words in buffer completion
+Plug 'ncm2/ncm2-bufword'
+" Filepath completion
+Plug 'ncm2/ncm2-path'
 
 " git integration
 Plug 'tpope/vim-fugitive'
@@ -50,6 +61,7 @@ Plug 'moll/vim-bbye'
 " Colors
 Plug 'dracula/vim', {'as': 'dracula'}
 
+Plug 'scrooloose/nerdcommenter'
 call plug#end()
 
 set nocompatible              " be iMproved, required
@@ -563,6 +575,25 @@ function! Multiple_cursors_after()
   endif
 endfunction
 
+" ncm2 settings
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=menuone,noselect,noinsert
+set shortmess+=c
+inoremap <c-c> <ESC>
+" make it fast
+let ncm2#popup_delay = 5
+let ncm2#complete_length = [[1, 1]]
+" Use new fuzzy based matches
+let g:ncm2#matcher = 'substrfuzzy'
+
+" Disable Jedi-vim autocompletion and enable call-signatures options
+let g:jedi#auto_initialization = 1
+let g:jedi#completions_enabled = 0
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#smart_auto_mappings = 0
+let g:jedi#popup_on_dot = 0
+let g:jedi#completions_command = ""
+let g:jedi#show_call_signatures = "1"
 " ========= vim-better-whitespace ==================
 
 " auto strip whitespace except for file with extention blacklisted
@@ -571,5 +602,22 @@ autocmd BufWritePre * StripWhitespace
 
 " =================== rainbow ============================
 let g:rainbow_active = 1
+
+" Map Ctrl-Backspace to delete the previous word in insert mode.
+noremap! <C-BS> <C-w>
+noremap! <C-h> <C-w>
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_ruby_exec = "ruby"
+let g:syntastic_checkers_python = "python"
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
 
 " vim:ts=2:sw=2:et
