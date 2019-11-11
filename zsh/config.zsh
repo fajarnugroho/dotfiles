@@ -54,11 +54,14 @@ bindkey "$terminfo[cuu1]" up-line-or-beginning-search
 bindkey "$terminfo[cud1]" down-line-or-beginning-search
 
 # backward and forward word with option+left/right
-bindkey '^[^[[D' backward-word
-bindkey '^[b' backward-word
-bindkey '^[^[[C' forward-word
-bindkey '^[f' forward-word
+#bindkey '^[^[[D' backward-word
+#bindkey '^[b' backward-word
+#bindkey '^[^[[C' forward-word
+#bindkey '^[f' forward-word
 
+# mappings for Ctrl-left-arrow and Ctrl-right-arrow for word moving
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
 # to to the beggining/end of line with fn+left/right or home/end
 bindkey "${terminfo[khome]}" beginning-of-line
 bindkey '^[[H' beginning-of-line
@@ -70,12 +73,18 @@ bindkey '^[[3~' delete-char
 bindkey '^?' backward-delete-char
 
 # delete word with ctrl+backspace
+<<<<<<< HEAD
 bindkey '^[[3;5~' backward-delete-word
 # bindkey '^[[3~' backward-delete-word
 
 # edit command line in $EDITOR
 bindkey '^e' edit-command-line
 
+=======
+bindkey '^[[3;5~' kill-word
+bindkey '^[[3~' backward-delete-word
+bindkey '^H' backward-kill-word
+>>>>>>> modify vimrc.symlink
 # search history with fzf if installed, default otherwise
 if test -d /usr/local/opt/fzf/shell; then
 	# shellcheck disable=SC1091
