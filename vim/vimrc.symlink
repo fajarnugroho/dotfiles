@@ -35,6 +35,18 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'puppetlabs/puppet-syntax-vim'
 Plug 'luochen1990/rainbow'
 Plug 'hashivim/vim-terraform'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2'
+Plug 'scrooloose/syntastic'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+" Fast python completion (use ncm2 if you want type info or snippet support)
+Plug 'HansPinckaers/ncm2-jedi'
+"Plug 'davidhalter/jedi-vim'
+" Words in buffer completion
+Plug 'ncm2/ncm2-bufword'
+" Filepath completion
+Plug 'ncm2/ncm2-path'
 
 " git integration
 Plug 'tpope/vim-fugitive'
@@ -47,8 +59,13 @@ Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 " messing up your layout
 Plug 'moll/vim-bbye'
 
+Plug 'tpope/vim-commentary'
+
 " Colors
 Plug 'dracula/vim', {'as': 'dracula'}
+Plug 'kristijanhusak/vim-hybrid-material'
+
+Plug 'scrooloose/nerdcommenter'
 
 call plug#end()
 
@@ -222,11 +239,14 @@ if has('gui_running')
   set regexpengine=1
   syntax enable
 endif
+"set background=dark
+"set t_Co=256
 if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
 :silent! colorscheme dracula
-"set background=dark
 " let g:hybrid_use_Xresources = 1
 " let g:rehash256 = 1
 set guifont=Source\ Code\ Pro:h15
@@ -472,8 +492,6 @@ let g:go_highlight_trailing_whitespace_error = 0
 let g:go_highlight_extra_types = 0
 let g:go_highlight_operators = 0
 let g:go_highlight_build_constraints = 1
-
-
 au FileType go nmap <Leader>s <Plug>(go-def-split)
 au FileType go nmap <Leader>v <Plug>(go-def-vertical)
 au FileType go nmap <Leader>i <Plug>(go-info)
@@ -563,6 +581,25 @@ function! Multiple_cursors_after()
   endif
 endfunction
 
+" ncm2 settings
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=menuone,noselect,noinsert
+set shortmess+=c
+inoremap <c-c> <ESC>
+" make it fast
+let ncm2#popup_delay = 5
+let ncm2#complete_length = [[1, 1]]
+" Use new fuzzy based matches
+let g:ncm2#matcher = 'substrfuzzy'
+
+" Disable Jedi-vim autocompletion and enable call-signatures options
+let g:jedi#auto_initialization = 1
+let g:jedi#completions_enabled = 0
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#smart_auto_mappings = 0
+let g:jedi#popup_on_dot = 0
+let g:jedi#completions_command = ""
+let g:jedi#show_call_signatures = "1"
 " ========= vim-better-whitespace ==================
 
 " auto strip whitespace except for file with extention blacklisted
@@ -572,4 +609,51 @@ autocmd BufWritePre * StripWhitespace
 " =================== rainbow ============================
 let g:rainbow_active = 1
 
+" Map Ctrl-Backspace to delete the previous word in insert mode.
+noremap! <C-BS> <C-w>
+noremap! <C-h> <C-w>
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_ruby_exec = "ruby"
+let g:syntastic_checkers_python = "flake8"
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+
+nmap  <leader>ci<CR>
+imap  <ESC><leader>ci<CR>
+xnoremap ^_ <leader>ci<CR>
+imap <C-v> <ESC>v
 " vim:ts=2:sw=2:et
+if &term =~ 'xterm-256color'
+  " disable Background Color Erase (BCE) so that color schemes
+  " render properly when inside 256-color tmux and GNU screen.
+  " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+  set t_ut=
+endif
+
+" Called once right before you start selecting multiple cursors
+function! Multiple_cursors_before()
+  try
+    let b:saved_delimitMate_statues = b:delimitMate_enabled
+    echom 1
+    DelimitMateOff
+  catch
+  endtry
+endfunction
+
+" Called once only when the multiple selection is canceled (default <Esc>)
+function! Multiple_cursors_after()
+    try
+      if b:saved_delimitMate_statues
+        DelimitMateOn
+      endif
+    catch
+    endtry
+endfunction
