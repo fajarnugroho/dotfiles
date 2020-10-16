@@ -273,26 +273,123 @@
 	<false/>
 	<key>FsTabDelay</key>
 	<real>1.0900000333786011</real>
-	<key>GlobalTouchBarMap</key>
+	<key>GlobalKeyMap</key>
 	<dict>
-		<key>touchbar:4E4C7556-174B-4DA6-9AE5-2167E28C660A</key>
+		<key>0x19-0x60000</key>
 		<dict>
 			<key>Action</key>
 			<integer>25</integer>
 			<key>Label</key>
 			<string>alert</string>
 			<key>Text</key>
-			<string>Alert on Next Mark
-Marks and Annotations.Alerts.Alert on Next Mark</string>
+			<string></string>
 		</dict>
-		<key>touchbar:B3CDE7F7-101E-4F36-A852-46498DBFC169</key>
+		<key>0x9-0x40000</key>
 		<dict>
 			<key>Action</key>
 			<integer>28</integer>
 			<key>Label</key>
 			<string>test</string>
 			<key>Text</key>
-			<string>21048CBB-8F4B-4492-A49A-8DCDADDF9248</string>
+			<string></string>
+		</dict>
+		<key>0xf700-0x300000</key>
+		<dict>
+			<key>Action</key>
+			<integer>7</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf700-0x320000</key>
+		<dict>
+			<key>Action</key>
+			<integer>20</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf701-0x300000</key>
+		<dict>
+			<key>Action</key>
+			<integer>6</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf701-0x320000</key>
+		<dict>
+			<key>Action</key>
+			<integer>21</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf702-0x300000</key>
+		<dict>
+			<key>Action</key>
+			<integer>2</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf702-0x320000</key>
+		<dict>
+			<key>Action</key>
+			<integer>18</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf703-0x300000</key>
+		<dict>
+			<key>Action</key>
+			<integer>0</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf703-0x320000</key>
+		<dict>
+			<key>Action</key>
+			<integer>19</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf729-0x100000</key>
+		<dict>
+			<key>Action</key>
+			<integer>5</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf72b-0x100000</key>
+		<dict>
+			<key>Action</key>
+			<integer>4</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf72c-0x100000</key>
+		<dict>
+			<key>Action</key>
+			<integer>9</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf72c-0x20000</key>
+		<dict>
+			<key>Action</key>
+			<integer>9</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf72d-0x100000</key>
+		<dict>
+			<key>Action</key>
+			<integer>8</integer>
+			<key>Text</key>
+			<string></string>
+		</dict>
+		<key>0xf72d-0x20000</key>
+		<dict>
+			<key>Action</key>
+			<integer>8</integer>
+			<key>Text</key>
+			<string></string>
 		</dict>
 	</dict>
 	<key>HapticFeedbackForEsc</key>
@@ -406,8 +503,44 @@ Marks and Annotations.Alerts.Alert on Next Mark</string>
 			<string>iTermTouchBarIdentifierNextMark</string>
 		</array>
 	</dict>
+<<<<<<< HEAD:iterm/com.googlecode.iterm2.plist
+||||||| ea1138c:iterm/com.googlecode.iterm2.plist.example
+	<key>NSWindow Frame NSColorPanel</key>
+	<string>0 139 224 275 0 0 1680 1027 </string>
+	<key>NSWindow Frame NSFontPanel</key>
+	<string>365 262 737 77 0 0 1680 1027 </string>
+	<key>NSWindow Frame SUAutomaticUpdateAlert</key>
+	<string>652 673 616 174 0 0 1920 1057 </string>
+	<key>NSWindow Frame SUStatusFrame</key>
+	<string>640 687 400 129 0 0 1680 1027 </string>
+	<key>NSWindow Frame SUUpdateAlert</key>
+	<string>490 317 700 622 0 0 1680 1027 </string>
+	<key>NSWindow Frame SharedPreferences</key>
+	<string>265 488 796 486 0 0 1680 1027 </string>
+=======
+	<key>NSWindow Frame NSColorPanel</key>
+	<string>0 139 224 275 0 0 1680 1027 </string>
+	<key>NSWindow Frame NSFontPanel</key>
+	<string>365 262 737 77 0 0 1680 1027 </string>
+	<key>NSWindow Frame SUAutomaticUpdateAlert</key>
+	<string>652 673 616 174 0 0 1920 1057 </string>
+	<key>NSWindow Frame SUStatusFrame</key>
+	<string>760 709 400 129 0 0 1920 1057 </string>
+	<key>NSWindow Frame SUUpdateAlert</key>
+	<string>490 317 700 622 0 0 1680 1027 </string>
+	<key>NSWindow Frame SharedPreferences</key>
+	<string>265 488 796 486 0 0 1680 1027 </string>
+	<key>NSWindow Frame UKCrashReporter</key>
+	<string>155 473 592 584 0 0 1920 1057 </string>
+>>>>>>> 38578bceb15386c23b91b29d231252b4ed5e4833:iterm/com.googlecode.iterm2.plist.example
 	<key>NSWindow Frame iTerm Window 0</key>
+<<<<<<< HEAD:iterm/com.googlecode.iterm2.plist
 	<string>469 275 760 492 0 0 1680 1050 </string>
+||||||| ea1138c:iterm/com.googlecode.iterm2.plist.example
+	<string>0 56 1920 1001 0 0 1920 1057 </string>
+=======
+	<string>0 52 1920 1005 0 0 1920 1057 </string>
+>>>>>>> 38578bceb15386c23b91b29d231252b4ed5e4833:iterm/com.googlecode.iterm2.plist.example
 	<key>NeverWarnAboutShortLivedSessions_21048CBB-8F4B-4492-A49A-8DCDADDF9248</key>
 	<true/>
 	<key>New Bookmarks</key>
@@ -1013,7 +1146,13 @@ Marks and Annotations.Alerts.Alert on Next Mark</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
+<<<<<<< HEAD:iterm/com.googlecode.iterm2.plist
 			<string>HackNerdFontComplete-Regular 15</string>
+||||||| ea1138c:iterm/com.googlecode.iterm2.plist.example
+			<string>SourceCodePro-Light 15</string>
+=======
+			<string>Hack-Regular 15</string>
+>>>>>>> 38578bceb15386c23b91b29d231252b4ed5e4833:iterm/com.googlecode.iterm2.plist.example
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -1369,12 +1508,40 @@ Marks and Annotations.Alerts.Alert on Next Mark</string>
 	</array>
 	<key>NoSyncAllAppVersions</key>
 	<array>
+<<<<<<< HEAD:iterm/com.googlecode.iterm2.plist
 		<string>3.3.12</string>
 	</array>
 	<key>NoSyncBFPRecents</key>
 	<array>
 		<string>Hack Nerd Font</string>
 		<string>Hack</string>
+||||||| ea1138c:iterm/com.googlecode.iterm2.plist.example
+		<string>3.3.2</string>
+		<string>3.2.9</string>
+		<string>3.3.1</string>
+		<string>3.3.4</string>
+		<string>3.3.0</string>
+		<string>3.3.3</string>
+		<string>3.3.5</string>
+=======
+		<string>3.3.6</string>
+		<string>3.2.9</string>
+		<string>3.3.1</string>
+		<string>3.3.3</string>
+		<string>3.3.5</string>
+		<string>3.3.7</string>
+		<string>3.3.0</string>
+		<string>3.3.2</string>
+		<string>3.3.4</string>
+	</array>
+	<key>NoSyncBFPFavorites</key>
+	<array>
+		<string>Hack</string>
+	</array>
+	<key>NoSyncBFPRecents</key>
+	<array>
+		<string>Hack</string>
+>>>>>>> 38578bceb15386c23b91b29d231252b4ed5e4833:iterm/com.googlecode.iterm2.plist.example
 	</array>
 	<key>NoSyncCommandHistoryHasEverBeenUsed</key>
 	<true/>
@@ -1390,14 +1557,34 @@ Marks and Annotations.Alerts.Alert on Next Mark</string>
 		<key>screenFrame</key>
 		<string>{{0, 0}, {1680, 1050}}</string>
 		<key>topLeft</key>
+<<<<<<< HEAD:iterm/com.googlecode.iterm2.plist
 		<string>{302, 731}</string>
+||||||| ea1138c:iterm/com.googlecode.iterm2.plist.example
+		<string>{591, 864}</string>
+=======
+		<string>{269, 732}</string>
+>>>>>>> 38578bceb15386c23b91b29d231252b4ed5e4833:iterm/com.googlecode.iterm2.plist.example
 	</dict>
 	<key>NoSyncInstallationId</key>
+<<<<<<< HEAD:iterm/com.googlecode.iterm2.plist
 	<string>0BE8DFB0-181F-4AFC-B294-24ED41433899</string>
 	<key>NoSyncLastTipTime</key>
 	<real>624263672.73733997</real>
+||||||| ea1138c:iterm/com.googlecode.iterm2.plist.example
+	<string>8D9EF306-D584-474D-94D4-060A9EC792D2</string>
+=======
+	<string>8D9EF306-D584-474D-94D4-060A9EC792D2</string>
+	<key>NoSyncLastTipTime</key>
+	<real>593715301.36013901</real>
+>>>>>>> 38578bceb15386c23b91b29d231252b4ed5e4833:iterm/com.googlecode.iterm2.plist.example
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
+<<<<<<< HEAD:iterm/com.googlecode.iterm2.plist
 	<integer>22</integer>
+||||||| ea1138c:iterm/com.googlecode.iterm2.plist.example
+	<integer>14</integer>
+=======
+	<integer>27</integer>
+>>>>>>> 38578bceb15386c23b91b29d231252b4ed5e4833:iterm/com.googlecode.iterm2.plist.example
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -2122,6 +2309,7 @@ Marks and Annotations.Alerts.Alert on Next Mark</string>
 			</dict>
 		</array>
 	</dict>
+<<<<<<< HEAD:iterm/com.googlecode.iterm2.plist
 	<key>NoSyncTipOfTheDayEligibilityBeganTime</key>
 	<real>623250327.50496697</real>
 	<key>NoSyncTipsToNotShow</key>
@@ -2136,6 +2324,43 @@ Marks and Annotations.Alerts.Alert on Next Mark</string>
 		<string>0002</string>
 		<string>0007</string>
 	</array>
+||||||| ea1138c:iterm/com.googlecode.iterm2.plist.example
+	<key>NoSyncSearchHistory</key>
+	<array>
+		<string>elastic</string>
+		<string>unchanged</string>
+		<string>servicemonitor.monitoring.coreos.com/cou</string>
+		<string>apply -f</string>
+		<string>apply- </string>
+		<string>couchbase-ex</string>
+		<string>i-prod1-us-west2-a-elasticsearch-data-20</string>
+		<string>i-prod1-us-west2--elasticsearch-data-20</string>
+		<string>zone</string>
+		<string>consul</string>
+	</array>
+	<key>NoSyncSearchHistory2</key>
+	<array>
+		<string>FAIL:</string>
+		<string>node</string>
+		<string>sel</string>
+		<string>select</string>
+		<string>fAIL</string>
+		<string>nodeS</string>
+		<string>metasp</string>
+		<string>metap</string>
+		<string>mete</string>
+	</array>
+	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
+	<real>546126422.28583503</real>
+=======
+	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
+	<real>546126422.28583503</real>
+	<key>NoSyncTipsToNotShow</key>
+	<array>
+		<string>000</string>
+		<string>0000</string>
+	</array>
+>>>>>>> 38578bceb15386c23b91b29d231252b4ed5e4833:iterm/com.googlecode.iterm2.plist.example
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -2216,7 +2441,13 @@ Marks and Annotations.Alerts.Alert on Next Mark</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
+<<<<<<< HEAD:iterm/com.googlecode.iterm2.plist
 	<date>2020-10-13T06:34:14Z</date>
+||||||| ea1138c:iterm/com.googlecode.iterm2.plist.example
+	<date>2019-10-09T23:12:55Z</date>
+=======
+	<date>2019-12-16T20:32:44Z</date>
+>>>>>>> 38578bceb15386c23b91b29d231252b4ed5e4833:iterm/com.googlecode.iterm2.plist.example
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -2263,6 +2494,8 @@ Marks and Annotations.Alerts.Alert on Next Mark</string>
 	<integer>10</integer>
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<false/>
+	<key>UKCrashReporterLastCrashReportDate</key>
+	<real>1574382080</real>
 	<key>URLHandlersByGuid</key>
 	<dict/>
 	<key>UseBorder</key>
@@ -2290,7 +2523,13 @@ Marks and Annotations.Alerts.Alert on Next Mark</string>
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
+<<<<<<< HEAD:iterm/com.googlecode.iterm2.plist
 	<string>3.3.12</string>
+||||||| ea1138c:iterm/com.googlecode.iterm2.plist.example
+	<string>3.3.5</string>
+=======
+	<string>3.3.7</string>
+>>>>>>> 38578bceb15386c23b91b29d231252b4ed5e4833:iterm/com.googlecode.iterm2.plist.example
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>

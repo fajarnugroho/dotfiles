@@ -40,11 +40,24 @@ Plug 'moll/vim-bbye'
 Plug 'tpope/vim-commentary'
 
 " Colors
+
+" git integration
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" safe buffer deletion
+Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
+
+" Delete buffers and close files in Vim without closing your windows or
+" messing up your layout
+Plug 'moll/vim-bbye'
+
+" Colors
 Plug 'altercation/vim-colors-solarized'
 Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'kristijanhusak/vim-hybrid-material'
 
-Plug 'scrooloose/nerdcommenter'
+Plug 'preservim/nerdcommenter'
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
@@ -397,7 +410,7 @@ au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 autocmd BufNewFile,BufReadPost *.scala setl shiftwidth=2 expandtab
 
 " Markdown Settings
-autocmd BufNewFile,BufReadPost *.md setl ts=4 sw=4 sts=4 expandtab
+autocmd BufNewFile,BufReadPost *.md setl tw=0 ts=4 sw=4 sts=4 expandtab
 
 " lua settings
 autocmd BufNewFile,BufRead *.lua setlocal noet ts=4 sw=4 sts=4
@@ -565,10 +578,14 @@ set statusline+=%*
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
-nmap  <leader>ci<CR>
-imap  <ESC><leader>ci<CR>
-xnoremap ^_ <leader>ci<CR>
-imap <C-v> <ESC>v
+" vim:ts=2:sw=2:et
+if &term =~ 'xterm-256color'
+  " disable Background Color Erase (BCE) so that color schemes
+  " render properly when inside 256-color tmux and GNU screen.
+  " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+  set t_ut=
+endif
+
 " vim:ts=2:sw=2:et
 if &term =~ 'xterm-256color'
   " disable Background Color Erase (BCE) so that color schemes
@@ -640,32 +657,26 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use U to show documentation in preview window
-nnoremap <silent> U :call <SID>show_documentation()<CR>
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
 
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
 
-" Remap for format selected region
-vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-" Show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
 
-" disable vim-go :GoDef short cut (gd)
-" this is handled by LanguageClient [LC]
-let g:go_def_mapping_enabled = 0
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not
+let g:NERDToggleCheckAllLines = 1
