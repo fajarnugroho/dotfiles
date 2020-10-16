@@ -46,7 +46,7 @@ setopt RM_STAR_SILENT
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 zle -N edit-command-line
-
+bindkey -e
 # fuzzy find: start to type
 bindkey "$terminfo[kcuu1]" up-line-or-beginning-search
 bindkey "$terminfo[kcud1]" down-line-or-beginning-search
@@ -73,18 +73,9 @@ bindkey '^[[3~' delete-char
 bindkey '^?' backward-delete-char
 
 # delete word with ctrl+backspace
-<<<<<<< HEAD
-bindkey '^[[3;5~' backward-delete-word
-# bindkey '^[[3~' backward-delete-word
-
-# edit command line in $EDITOR
-bindkey '^e' edit-command-line
-
-=======
 bindkey '^[[3;5~' kill-word
-bindkey '^[[3~' backward-delete-word
+bindkey '^[[3~' delete-char
 bindkey '^H' backward-kill-word
->>>>>>> modify vimrc.symlink
 # search history with fzf if installed, default otherwise
 if test -d /usr/local/opt/fzf/shell; then
 	# shellcheck disable=SC1091

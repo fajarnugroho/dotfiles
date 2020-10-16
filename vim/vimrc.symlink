@@ -2,17 +2,6 @@
 call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'fatih/vim-go', {'tag': '*', 'do': ':GoInstallBinaries' }
-Plug 'nsf/gocode', {'rtp': 'vim'}
-
-" auto-complete for golang et al
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-Plug 'zchee/deoplete-go', { 'do': 'make'}
 
 " provides insert mode auto-completion for quotes, parens, brackets, etc.
 Plug 'Raimondi/delimitMate'
@@ -28,24 +17,29 @@ Plug 'Yggdroot/indentLine'
 Plug 'godlygeek/tabular'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'tpope/vim-endwise'
 Plug 'elzr/vim-json'
 Plug 'junegunn/vim-easy-align'
 Plug 'ekalinin/Dockerfile.vim'
-Plug 'puppetlabs/puppet-syntax-vim'
 Plug 'luochen1990/rainbow'
-Plug 'hashivim/vim-terraform'
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2'
-Plug 'scrooloose/syntastic'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Fast python completion (use ncm2 if you want type info or snippet support)
-Plug 'HansPinckaers/ncm2-jedi'
-" Words in buffer completion
-Plug 'ncm2/ncm2-bufword'
-" Filepath completion
-Plug 'ncm2/ncm2-path'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'rust-lang/rust.vim'
+
+" git integration
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" safe buffer deletion
+Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
+
+" Delete buffers and close files in Vim without closing your windows or
+" messing up your layout
+Plug 'moll/vim-bbye'
+
+Plug 'tpope/vim-commentary'
+
+" Colors
 
 " git integration
 Plug 'tpope/vim-fugitive'
@@ -59,9 +53,11 @@ Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 Plug 'moll/vim-bbye'
 
 " Colors
+Plug 'altercation/vim-colors-solarized'
 Plug 'dracula/vim', {'as': 'dracula'}
 
-Plug 'scrooloose/nerdcommenter'
+Plug 'preservim/nerdcommenter'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 set nocompatible              " be iMproved, required
@@ -241,7 +237,7 @@ endif
 "set background=dark
 " let g:hybrid_use_Xresources = 1
 " let g:rehash256 = 1
-set guifont=Source\ Code\ Pro:h15
+set guifont=Fira\ Code\ Medium:h15
 set guioptions-=L
 
 " This comes first, because we have mappings that depend on leader
@@ -250,6 +246,9 @@ set guioptions-=L
 let mapleader = ","
 let g:mapleader = ","
 
+
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
 " This trigger takes advantage of the fact that the quickfix window can be
 " easily distinguished by its file-type, qf. The wincmd J command is
 " equivalent to the Ctrl+W, Shift+J shortcut telling Vim to move a window to
@@ -407,7 +406,7 @@ au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 autocmd BufNewFile,BufReadPost *.scala setl shiftwidth=2 expandtab
 
 " Markdown Settings
-autocmd BufNewFile,BufReadPost *.md setl ts=4 sw=4 sts=4 expandtab
+autocmd BufNewFile,BufReadPost *.md setl tw=0 ts=4 sw=4 sts=4 expandtab
 
 " lua settings
 autocmd BufNewFile,BufRead *.lua setlocal noet ts=4 sw=4 sts=4
@@ -538,21 +537,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " ==================== vim-json ====================
 let g:vim_json_syntax_conceal = 0
 
-" ==================== Completion =========================
-" use deoplete for Neovim.
-if has('nvim')
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#ignore_sources = {}
-  let g:deoplete#ignore_sources._ = ['buffer', 'member', 'tag', 'file', 'neosnippet']
-  let g:deoplete#sources#go#sort_class = ['func', 'type', 'var', 'const']
-  let g:deoplete#sources#go#align_class = 1
-
-
-  " Use partial fuzzy matches like YouCompleteMe
-  call deoplete#custom#source('_', 'matchers', ['matcher_fuzzy'])
-  call deoplete#custom#source('_', 'converters', ['converter_remove_paren'])
-  call deoplete#custom#source('_', 'disabled_syntaxes', ['Comment', 'String'])
-endif
 
 " ==================== vim-multiple-cursors ====================
 let g:multi_cursor_use_default_mapping=0
@@ -575,27 +559,6 @@ function! Multiple_cursors_after()
   endif
 endfunction
 
-" ncm2 settings
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=menuone,noselect,noinsert
-set shortmess+=c
-inoremap <c-c> <ESC>
-" make it fast
-let ncm2#popup_delay = 5
-let ncm2#complete_length = [[1, 1]]
-" Use new fuzzy based matches
-let g:ncm2#matcher = 'substrfuzzy'
-
-" Disable Jedi-vim autocompletion and enable call-signatures options
-let g:jedi#auto_initialization = 1
-let g:jedi#completions_enabled = 0
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#smart_auto_mappings = 0
-let g:jedi#popup_on_dot = 0
-let g:jedi#completions_command = ""
-let g:jedi#show_call_signatures = "1"
-" ========= vim-better-whitespace ==================
-
 " auto strip whitespace except for file with extention blacklisted
 let blacklist = []
 autocmd BufWritePre * StripWhitespace
@@ -608,16 +571,102 @@ noremap! <C-BS> <C-w>
 noremap! <C-h> <C-w>
 
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_ruby_exec = "ruby"
-let g:syntastic_checkers_python = "python"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 
 " vim:ts=2:sw=2:et
+if &term =~ 'xterm-256color'
+  " disable Background Color Erase (BCE) so that color schemes
+  " render properly when inside 256-color tmux and GNU screen.
+  " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+  set t_ut=
+endif
+
+" Called once right before you start selecting multiple cursors
+function! Multiple_cursors_before()
+  try
+    let b:saved_delimitMate_statues = b:delimitMate_enabled
+    echom 1
+    DelimitMateOff
+  catch
+  endtry
+endfunction
+
+" Called once only when the multiple selection is canceled (default <Esc>)
+function! Multiple_cursors_after()
+    try
+      if b:saved_delimitMate_statues
+        DelimitMateOn
+      endif
+    catch
+    endtry
+endfunction
+
+" Rust
+let g:rustfmt_autosave = 1
+" -------------------------------------------------------------------------------------------------
+" coc.nvim default settings
+" -------------------------------------------------------------------------------------------------
+
+" if hidden is not set, TextEdit might fail.
+set hidden
+" Better display for messages
+set cmdheight=2
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+" always show signcolumns
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not
+let g:NERDToggleCheckAllLines = 1
