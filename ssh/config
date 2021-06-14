@@ -2,4 +2,6 @@ Host *
   ServerAliveInterval 60
   StrictHostKeyChecking no
 
+Host 10.0.1.*
+  ProxyCommand ssh fajar.nugroho@35.240.232.70 -W %h:%p
 Include ~/.ssh/config.local
